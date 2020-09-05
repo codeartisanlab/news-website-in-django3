@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container mt-3 mb-5">
+	<!-- featured news -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-8">
+			<div class="card mb-3">
+                <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{news.title}}</h5>
+			    <hr/>
+			    <p class="card-text">{{news.detail}}</p>
+			  </div>
+			  <div class="card-footer">
+			  	In <a href="/category/{{news.category.id}}">{{news.category.title}}</a>
+			  </div>
+			</div>
+
+			<!-- Comments -->
+			<div class="card my-4">
+				<h6 class="card-header">Add Comment</h6>
+				<div class="card-body">
+					<form method="post">
+						<div class="form-group row">
+							<label class="col-md-2">Name<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="text" name="name" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Email<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="temailext" name="email" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Comment<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<textarea class="form-control" name="message" required></textarea>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary" />
+					</form>
+				</div>
+			</div>
+			<!-- Previous Comments -->
+			<div class="card my-4">
+				<h6 class="card-header">Comments</h6>
+				<div class="card-body">
+					<?php for($i=1; $i<=3; $i++){ ?>
+					<blockquote class="blockquote text-right">
+					  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+					  <footer class="blockquote-footer">Name <cite title="Source Title">Email</cite></footer>
+					</blockquote>
+					<hr/>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<!-- Related News -->
+		<div class="col-md-4">
+			<h3 class="mb-3 border-bottom pb-1">From this Category</h3>
+			<!-- Category Box -->
+			{% for news in related_news %}
+			<div class="card mb-3 shadow">
+                <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{news.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</main>
+{% endblock %}
