@@ -21,7 +21,11 @@
 			<div class="card my-4">
 				<h6 class="card-header">Add Comment</h6>
 				<div class="card-body">
-					<form method="post">
+					{% for message in messages %}
+					<p class="text-success">{{message}}</p>
+					{% endfor %}
+					<form method="post" action="/detail/{{news.id}}">
+						{% csrf_token %}
 						<div class="form-group row">
 							<label class="col-md-2">Name<span class="text-danger">*</span></label>
 							<div class="col-md-10">
@@ -48,13 +52,13 @@
 			<div class="card my-4">
 				<h6 class="card-header">Comments</h6>
 				<div class="card-body">
-					<?php for($i=1; $i<=3; $i++){ ?>
+					{% for comment in comments %}
 					<blockquote class="blockquote text-right">
-					  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-					  <footer class="blockquote-footer">Name <cite title="Source Title">Email</cite></footer>
+					  <p class="mb-0">{{comment.comment}}</p>
+					  <footer class="blockquote-footer">{{comment.name}} <cite title="Source Title">{{comment.email}}</cite></footer>
 					</blockquote>
 					<hr/>
-					<?php } ?>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

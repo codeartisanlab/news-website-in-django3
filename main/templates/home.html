@@ -37,7 +37,7 @@
 	</div>
 	<!-- Category Wise News -->
 	{% for category in three_categories %}
-	<h3 class="border-bottom pb-1">{{category.title}} <a href="/category.php" class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+	<h3 class="border-bottom pb-1">{{category.title}} <a href="/category/{{category.id}}" class="float-right btn btn-sm btn-dark">In this Category</a></h3>
 	<div class="row my-4">
 		{% for news in category.news_set.all %}
 			{% if forloop.counter < 5 %}
